@@ -1,0 +1,94 @@
+
+              To Establish Connection b/w two Servers
+             -----------------------------------------------------------
+  1. passwd method
+  2. ssh method  (secure shell)
+  3. ssl method  (secure socket layer)
+
+passwd method:
+----------------------
+Step-1 :  create two diff. servers (Ubuntu,  CentOS)
+
+Step-2 :  change "root" user password
+                 #sudo su  -   
+                 #passwd   root
+            Enter New Passwd : root
+            Re-Enter Passwd   : root
+
+Step-3 :  do changes the following the changes 
+              #vi  /etc/ssh/sshd_config
+            PermitRootLogin   yes
+            PasswordAuthentication yes
+                :wq   <---- write and quit
+
+Step-4 :  restart "ssh" service 
+               #service  ssh restart          (in Ubuntu / Debian)
+               #systemctl  restart  sshd   (in Centos / Redhat)
+
+Step-5: to connect to other server
+               #ssh  root@192.168.33.25
+
+
+ssh keys method:
+-------------------------
+Step-1 :  create two diff. servers (Ubuntu,  CentOS)
+
+Step-2 : to generate key pair
+                #ssh-keygen
+            (it creates id_rsa (private key),  
+                              id_rsa.pub (public key)...) 
+
+Step-3 : to send a public key
+                #ssh-copy-id  root@192.168.33.26
+
+Step-4 :  to connect to other server
+                  #ssh   -i  id_rsa   root@192.168.26
+
+
+          To copy files from one server to other server 
+         ---------------------------------------------------------------
+  #echo  "Hello from Tom-1"   >  demo.txt 
+  # scp  -i   ~/.ssh/id_rsa    demo.txt   root@192.168.33.26:/tmp/
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              
+
+
+
+
+
+
+
+ 
+
